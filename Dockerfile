@@ -1,7 +1,7 @@
-FROM centos
+FROM ubuntu:20.04
 LABEL maintainer="Vladimir Naumov"
-RUN dnf update -y
-RUN dnf install httpd -y
-ENTRYPOINT ["/usr/sbin/httpd","-D","FOREGROUND"]
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y apache2
+CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
 EXPOSE 80
-COPY index.html /var/www/html/
+COPY index.html /var/www/html/index.html
