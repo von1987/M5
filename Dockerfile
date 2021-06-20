@@ -1,7 +1,7 @@
-FROM ubuntu:20.04
+FROM centos
 LABEL maintainer="Vladimir Naumov"
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y apache2
-CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
+RUN yum update -y
+RUN yum install httpd -y
+ENTRYPOINT ["/usr/sbin/httpd","-D","FOREGROUND"]
 EXPOSE 80
-COPY index.html /var/www/html/index.html
+COPY index.html /var/www/html/
